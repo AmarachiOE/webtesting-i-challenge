@@ -67,31 +67,57 @@ describe("enhancer.js", () => {
     });
 
     it("should decrease enhancement by 1 if enhancement is greater than 16", () => {
-        const item = {
-            name: "box",
-            enhancement: 17,
-            durability: 78
-          };
-    
-          expect(enhancer.fail(item)).toEqual({
-            ...item,
-            enhancement: 16,
-            durability: 68
-          });
+      const item = {
+        name: "box",
+        enhancement: 17,
+        durability: 78
+      };
+
+      expect(enhancer.fail(item)).toEqual({
+        ...item,
+        enhancement: 16,
+        durability: 68
+      });
     });
 
     // checking durability range restriction
-    it("should not allow durability to go below zero", () => {
-        const item = {
-            name: "box",
-            enhancement: 17,
-            durability: 9
-          };
-        expect(
-            enhancer.fail(item)
-          ).toEqual({ ...item, enhancement: 16, durability: 0 });
-    });
-    
+    // it("should not allow durability to go below zero", () => {
+    //     const item = {
+    //         name: "box",
+    //         enhancement: 17,
+    //         durability: 10
+    //       };
+    //     expect(
+    //         enhancer.fail(item)
+    //       ).toEqual({ ...item, enhancement: 16, durability: 0 });
+    // });
   });
 
+  describe("get() method", () => {
+    it("should not modify name if enhancement is 0", () => {
+      const item = {
+        name: "box",
+        enhancement: 0,
+        durability: 78
+      };
+
+      expect(enhancer.get(item)).toEqual({
+        ...item,
+        name: "box"
+      });
+    });
+
+    it("should include [+enhancement level] in front of name if enhancement level is greater than 0", () => {
+      const item = {
+        name: "box",
+        enhancement: 9,
+        durability: 78
+      };
+
+      expect(enhancer.get(item)).toEqual({
+        ...item,
+        name: "[+9] box"
+      });
+    });
+  });
 });
