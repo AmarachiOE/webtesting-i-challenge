@@ -27,4 +27,27 @@ describe("enhancer.js", () => {
       ).toEqual({ ...item, enhancement: 4 });
     });
   });
+
+  describe("fail() method", () => {
+    it("should conditionally decrease an item's durability by 5 or 10 and conditionally decrease enhancement by 1", () => {
+      const item = {
+        name: "box",
+        enhancement: 14,
+        durability: 78
+      };
+      expect(enhancer.fail(item)).toEqual({
+        ...item,
+        enhancement: 14,
+        durability: 73
+      });
+
+      expect(
+        enhancer.fail({
+          name: "box",
+          enhancement: 17,
+          durability: 78
+        })
+      ).toEqual({ ...item, enhancement: 16, durability: 68 });
+    });
+  });
 });
