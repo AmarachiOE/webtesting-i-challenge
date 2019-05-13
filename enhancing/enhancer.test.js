@@ -80,17 +80,18 @@ describe("enhancer.js", () => {
       });
     });
 
-    // checking durability range restriction
-    // it("should not allow durability to go below zero", () => {
-    //     const item = {
-    //         name: "box",
-    //         enhancement: 17,
-    //         durability: 10
-    //       };
-    //     expect(
-    //         enhancer.fail(item)
-    //       ).toEqual({ ...item, enhancement: 16, durability: 0 });
-    // });
+    it("should not allow durability to go below zero", () => {
+      const item = {
+        name: "box",
+        enhancement: 17,
+        durability: 7
+      };
+      expect(enhancer.fail(item)).toEqual({
+        ...item,
+        enhancement: 16,
+        durability: 0
+      });
+    });
   });
 
   describe("get() method", () => {

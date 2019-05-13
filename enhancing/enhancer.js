@@ -27,7 +27,7 @@ function succeed(item) {
 
 function fail(item) {
   const newDurability =
-    item.enhancement < 15 ? item.durability - 5 : item.durability - 10;
+    item.enhancement < 15 ? Math.max(0, item.durability - 5) : Math.max(0, item.durability - 10);
 
   const newEnhancement =
     item.enhancement > 16 ? item.enhancement - 1 : item.enhancement;
@@ -62,16 +62,3 @@ function get(item) {
     name: newName
   };
 }
-
-// ================================================
-/* 
-
-Tried to impose a range on numeric values for fail()
-
-
- const newDurability =
-    item.enhancement < 15 ? 
-    (item.durability  >= 5 ? item.durability - 5 : item.durability === 0 ) : 
-    (item.durability >= 10 ? item.durability - 10 : item.durability == 0);
-
-*/
