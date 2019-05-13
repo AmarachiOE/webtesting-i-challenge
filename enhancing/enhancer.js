@@ -35,13 +35,17 @@ When enhancement fails
 
 function fail(item) {
   const newDurability =
-    item.enhancement < 15 ? item.durability - 5 : item.durability - 10;
+    item.enhancement < 15 ? 
+    (item.durability  >= 5 ? item.durability - 5 : item.durability === 0 ) : 
+    (item.durability >= 10 ? item.durability - 10 : item.durability === 0);
 
   const newEnhancement =
     item.enhancement > 16 ? item.enhancement - 1 : item.enhancement;
 
   return { ...item, enhancement: newEnhancement, durability: newDurability };
 }
+
+// accepts an item object and returns a new item with the durability restored to 100.
 
 function repair(item) {
   return { ...item, durability: 100 };
